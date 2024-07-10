@@ -1,11 +1,17 @@
+import { signIn } from '@/auth'
 import Singup from '@/components/Singup'
 import React from 'react'
 
 function SignupPage() {
+  const signupHandler = async () => {
+    'use server'
+    await signIn('google')
+  }
+
   return (
-    <div>
+    <form action={signupHandler}>
         <Singup />
-    </div>
+    </form>
   )
 }
 

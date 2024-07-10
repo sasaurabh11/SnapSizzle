@@ -4,14 +4,17 @@ import React from 'react'
 // import { Input } from '../ui/input';
 // import { TbGridDots } from "react-icons/tb";
 // import Link from 'next/link';
-// import LogoutButton from './LogoutButton';
 // import { auth } from '@/auth';
 import { Button } from './ui/button'
 import logo from "../../public/logo-app.png"
 import Link from 'next/link'
+import Logout from './shared/Logout'
+import { auth } from '@/auth'
+import { TbGridDots } from 'react-icons/tb'
 
 const Navbar = async () => {
-    // const authUser = await auth();
+    const authUser = await auth()
+
     return (
         <div className='flex items-center justify-between w-screen px-10 py-4'>
             <div className='flex items-center gap-2'>
@@ -26,14 +29,14 @@ const Navbar = async () => {
             </div>
             <div className='flex items-center gap-5'>
                 <Button size={'icon'} variant={'secondary'} className='rounded-full bg-white text-black'>
-                    {/* <TbGridDots size={"24px"} /> */}
+                    <TbGridDots size={"24px"} />
                 </Button>
                 <Button className='rounded-full'>Snapchat Ads</Button>
                 <Button className='rounded-full'>Download</Button>
 
-                {/* {
-                    authUser ? <LogoutButton /> : (<Link href="/login"><Button className='rounded-full'>Login</Button></Link>)
-                } */}
+                {
+                    authUser ? (<Logout />) : (<Link href="/login"><Button className='rounded-full'>Login</Button></Link>)
+                }
 
             </div>
         </div>
