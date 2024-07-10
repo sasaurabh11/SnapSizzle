@@ -4,7 +4,7 @@ import { Avatar, AvatarImage } from './ui/avatar'
 
 function Friend({user} : {user : any}) {
   return (
-    <Link href={'/chat/'} className='flex items-center justify-between border-b-2 border-[#E3E6E8] p-3 my-2'>
+    <Link href={`/chat/${user._id}`} className='flex items-center justify-between border-b-2 border-[#E3E6E8] p-3 my-2'>
       <div className='flex gap-2'>
           <Avatar>
               <AvatarImage src={user.participants[0].profilePhoto} alt={'profile Photo'} />

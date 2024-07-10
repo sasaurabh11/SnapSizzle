@@ -1,5 +1,7 @@
+import { ConnectDB } from "@/db/db_config"
 import { Message } from "@/models/message.model"
 import UserModel from "@/models/user.model"
+import { UserDocumentType } from "@/types"
 
 export const getSideBarUsers = async (LoggedInUserId : string) => {
     try {
@@ -33,6 +35,18 @@ export const getSideBarUsers = async (LoggedInUserId : string) => {
 
         return userInfo
 
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export const getProfileUser = async (userId : string) => {
+    try {
+        await ConnectDB()
+        const user : UserDocumentType | null = await UserModel.findById(userId)
+        if(!user) return ('User not found')
+        return user
     } catch (error) {
         console.log(error)
         throw error

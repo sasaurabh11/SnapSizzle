@@ -34,12 +34,12 @@ const UserDialog = (
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sendMessageLoading, setSendMessageLoading] = useState(false);
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedUser, setSelectedUser] = useState<UserDocumentType>();
 //   const router = useRouter();
 
-//   const selectedUserHandler = (user: UserDocument) => {
-//     setSelectedUser(user);
-//   }
+  const selectedUserHandler = (user: UserDocumentType) => {
+    setSelectedUser(user);
+  }
 //   const sendMessageHandler = async () => {
 //     setSendMessageLoading(true);
 //     try {
@@ -96,9 +96,9 @@ const UserDialog = (
               )
             })
           }
-          {/* {
+          {
             loading && <div className='mx-auto'><Loader2 className="mr-2 h-4 w-4 animate-spin" /></div>
-          } */}
+          }
         </div>
         {/* <DialogFooter>
           <Button onClick={close} variant={'destructive'}  type="submit">Cancel</Button>
