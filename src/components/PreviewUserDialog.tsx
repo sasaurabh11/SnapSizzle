@@ -17,7 +17,8 @@ import { Loader2 } from 'lucide-react'
 // import { sendSnapMessage } from '@/lib/serveractions'
 import { useRouter } from 'next/navigation'
 import { UserDocumentType } from '@/types'
- 
+import { sendSnapMessage } from '@/lib/serveraction'
+
 
 const UserDialog = (
   {
@@ -35,29 +36,33 @@ const UserDialog = (
   const [loading, setLoading] = useState(false);
   const [sendMessageLoading, setSendMessageLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserDocumentType>();
-//   const router = useRouter();
+    const router = useRouter();
 
   const selectedUserHandler = (user: UserDocumentType) => {
     setSelectedUser(user);
   }
-//   const sendMessageHandler = async () => {
-//     setSendMessageLoading(true);
-//     try {
-//       await sendSnapMessage(selectedFile, selectedUser?._id, 'image');
-//       router.push(`/chat/${selectedUser?._id}`);
-//     } catch (error) {
-//       console.log(error);
-//     } finally {
-//       setSendMessageLoading(false);
-//     }
-//   }
+    const sendMessageHandler = async () => {
+      if (!selectedUser || !selectedUser._id) {
+        console.error("Selected user or user ID is undefined");
+        return;
+      }
+      setSendMessageLoading(true);
+      try {
+        await sendSnapMessage(selectedFile, selectedUser?._id as string, 'image');
+        router.push(`/chat/${selectedUser?._id}`);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSendMessageLoading(false);
+      }
+    }
 
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
         const res = await fetch('/api/chat/getusers');
-        const data = await res.json(); 
+        const data = await res.json();
         setUsers(data);
       } catch (error) {
         console.log(error);
@@ -82,7 +87,7 @@ const UserDialog = (
             users.map((user: UserDocumentType) => {
               return (
                 <div
-                  // onClick={() => selectedUserHandler(user)}
+                  onClick={() => selectedUserHandler(user)}
                   key={user._id as string}
                   className={`flex ${selectedUser?._id === user._id ? 'bg-gray-200' : null} items-center gap-5 cursor-pointer p-2 rounded-md hover:bg-gray-200`}>
                   <Avatar>
@@ -100,8 +105,8 @@ const UserDialog = (
             loading && <div className='mx-auto'><Loader2 className="mr-2 h-4 w-4 animate-spin" /></div>
           }
         </div>
-        {/* <DialogFooter>
-          <Button onClick={close} variant={'destructive'}  type="submit">Cancel</Button>
+        <DialogFooter>
+          <Button onClick={close} variant={'destructive'} type="submit">Cancel</Button>
           {
             sendMessageLoading ? (
               <Button>
@@ -112,7 +117,7 @@ const UserDialog = (
               <Button disabled={!selectedUser || loading} onClick={sendMessageHandler} type="submit">Send <span className='ml-1'><VscSend size={'18px'} /></span></Button>
             )
           }
-       </DialogFooter> */}
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

@@ -1,12 +1,13 @@
 import { ConnectDB } from "@/db/db_config"
 import { Message } from "@/models/message.model"
-import UserModel from "@/models/user.model"
+import User from "@/models/user.model"
 import { UserDocumentType } from "@/types"
 
 export const getSideBarUsers = async (LoggedInUserId : string) => {
     try {
+        await ConnectDB()
         
-        const OtherUsers = await UserModel.find({_id : {$ne : LoggedInUserId}})
+        const OtherUsers = await User.find({_id : {$ne : LoggedInUserId}})
 
         const userInfo = await Promise.all(
             OtherUsers.map(async (user) => {
@@ -44,9 +45,9 @@ export const getSideBarUsers = async (LoggedInUserId : string) => {
 export const getProfileUser = async (userId : string) => {
     try {
         await ConnectDB()
-        const user : UserDocumentType | null = await UserModel.findById(userId)
+        const user : UserDocumentType | null = await User.findById(userId)
         if(!user) return ('User not found')
-        return user
+        return JSON.parse(JSON.stringify(user))
     } catch (error) {
         console.log(error)
         throw error

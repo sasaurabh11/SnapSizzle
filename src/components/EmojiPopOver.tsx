@@ -12,6 +12,7 @@ import {
   import { readFileAsDataURL } from "@/lib/utils";
 //   import { sendSnapMessage } from "@/lib/serveractions";
   import { Loader2 } from "lucide-react";
+import { sendSnapMessage } from "@/lib/serveraction";
   
   export function EmojiPopover() {
     const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ import {
       try {
         const blob = await fetch(srcUrl).then((res) => res.blob());
         const dataUrl = await readFileAsDataURL(blob);
-        // await sendSnapMessage(dataUrl, id, "image");
+        await sendSnapMessage(dataUrl, id, "image");
       } catch (error) {
         console.log(error);
       } finally {

@@ -12,7 +12,6 @@ import { MdOutlineLaptop } from 'react-icons/md';
 
 const Header = async () => {
   const authUser = await auth();
-  // console.log(authUser)
 
   return (
     <div className='flex justify-between items-center max-w-6xl mx-auto'>

@@ -18,8 +18,6 @@ const ChatCamera = () => {
         }
     }
 
-    console.log("selected file", selectedFile)
-
     const closeDialog = () => {
         setSelectedFile("");
         setStep(0);

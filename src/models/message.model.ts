@@ -4,11 +4,11 @@ import { MessageDocumentType } from "@/types";
 const messageModel = new mongoose.Schema<MessageDocumentType>({
     senderId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserModel'
+        ref: 'User'
     },
     receiverId:{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'UserModel'
+        ref : 'User'
     },
     content:{
         type:String,

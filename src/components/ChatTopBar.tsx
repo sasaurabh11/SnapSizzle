@@ -1,11 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 import React from 'react'
 import { IoIosArrowBack } from 'react-icons/io'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Loader2 } from 'lucide-react'
+import { DeleteChat } from '@/lib/serveraction'
+import { useParams } from 'next/navigation'
+import { useFormStatus } from 'react-dom'
 
 function ChatTopBar({userProfile} : {userProfile : any}) {
+    const {id} = useParams<{id : string}>()
+    const deleteChatHandler = DeleteChat.bind(null, id)
+
   return (
     <div>
         <div className='w-full flex items-center justify-between'>
@@ -20,7 +28,7 @@ function ChatTopBar({userProfile} : {userProfile : any}) {
                     <h1 className='font-bold'>{userProfile?.fullname}</h1>
                 </div>
             </div>
-            <form >
+            <form action={deleteChatHandler}>
                 <SubmitButton />
             </form>
         </div>
@@ -31,13 +39,12 @@ function ChatTopBar({userProfile} : {userProfile : any}) {
 export default ChatTopBar;
 
 const SubmitButton = () => {
-    // const { pending } = useFormStatus();
+    const { pending } = useFormStatus();
     return (
-        <Button variant="destructive">
-            {/* {
-                !pending ? "Clear Chat" : <Button variant={'destructive'}><Loader2 className="mr-2 h-4 w-4 animate-spin" />Please Wait</Button>
-            } */}
-            button
+        <Button className='rounded-full bg-rose-600'>
+            {
+                !pending ? "Clear Chat" : <Button variant={'destructive'}><Loader2 className="mr-2 h-4 w-4 animate-spin bg-rose-600" />Please Wait</Button>
+            }
         </Button>
     )
 }

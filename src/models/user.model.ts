@@ -23,6 +23,6 @@ const UserSchema : Schema<UserDocumentType> = new mongoose.Schema({
 
 }, {timestamps : true})
 
-const UserModel = (mongoose.models.User as mongoose.Model<UserDocumentType>) || (mongoose.model<UserDocumentType>("User", UserSchema))
+const User = (mongoose.models.User as mongoose.Model<UserDocumentType>) || (mongoose.model<UserDocumentType>("User", UserSchema))
 
-export default UserModel
+export default User

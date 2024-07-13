@@ -5,7 +5,7 @@ const chatModel = new mongoose.Schema<ChatDocument>({
     participants: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserModel'
+            ref: 'User'
         }
     ],
     messages: [

@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { ConnectDB } from "@/db/db_config";
-import UserModel from "@/models/user.model";
+import User from "@/models/user.model";
 import { UserDocumentType } from "@/types";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
@@ -11,7 +11,7 @@ export async function GET(req : NextRequest) {
         if(!authUser) return;
 
         await ConnectDB()
-        const users : UserDocumentType[] = await UserModel.find({ _id: { $ne: authUser.user?._id } })
+        const users : UserDocumentType[] = await User.find({ _id: { $ne: authUser.user?._id } })
         return NextResponse.json(users);
     } catch (error) {
         console.log(error);
