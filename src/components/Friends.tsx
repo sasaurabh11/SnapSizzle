@@ -11,7 +11,7 @@ const Friends = async () => {
     <div className='flex-1 overflow-y-auto'>
         {
             OtherUser.map((user) => {
-                return (<Friend user={user} />);
+                return (<Friend key={user._id as number} user={user}/>);
             })
         }
     </div>
