@@ -16,7 +16,7 @@ const Header = async () => {
   return (
     <div className='flex justify-between items-center max-w-6xl mx-auto'>
       <div>
-        <h1 className='text-7xl font-medium'>Snapchat is <br /> now on the <br /> web!</h1>
+        <h1 className='text-7xl font-medium'>SnapSizzle <br /> transforms your life!</h1>
         <h1 className='my-5 text-xl '>Chat, Snap, and video call your friends from <br /> wherever you are.</h1>
         {/* <Link href={"/login"}><Button className='rounded-full gap-2'><FaLaptop /> <span>Login to chat</span> </Button></Link> */}
         {
